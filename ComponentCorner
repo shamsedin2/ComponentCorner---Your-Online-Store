@@ -1,0 +1,356 @@
+import React from 'react';
+
+const styles = `
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  .app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header Styles */
+  .header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .store-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #5dade2;
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-menu a:hover {
+    color: #5dade2;
+  }
+
+  /* Hero Styles */
+  .hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  .hero-cta {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .hero-cta:hover {
+    background-color: #e67e22;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+
+  /* Products Section */
+  .products-container {
+    flex: 1;
+    padding: 4rem 2rem;
+    background-color: #f8f9fa;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #2c3e50;
+  }
+
+  .products-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  /* ProductCard Styles */
+  .product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  }
+
+  .product-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .product-info {
+    padding: 1.5rem;
+  }
+
+  .product-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+  }
+
+  .product-description {
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .product-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #27ae60;
+  }
+
+  /* Footer Styles */
+  .footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 3rem 2rem;
+    margin-top: auto;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .footer-section h3 {
+    color: #5dade2;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .footer-section h4 {
+    color: #5dade2;
+    margin-bottom: 1rem;
+  }
+
+  .footer-section p {
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+  }
+
+  .footer-section a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .footer-section a:hover {
+    color: #5dade2;
+  }
+
+  @media (max-width: 768px) {
+    .header-content {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-menu {
+      gap: 1rem;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+`;
+
+// Inject styles
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = styles;
+  document.head.appendChild(styleSheet);
+}
+
+// Header Component
+function Header({ storeName }) {
+  return (
+    <header className="header">
+      <div className="header-content">
+        <h1 className="store-name">{storeName}</h1>
+        <nav className="nav-menu">
+          <a href="#home">Home</a>
+          <a href="#products">Products</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+// Hero Component
+function Hero({ title, subtitle, ctaText }) {
+  return (
+    <section className="hero">
+      <div className="hero-content">
+        <h2 className="hero-title">{title}</h2>
+        <p className="hero-subtitle">{subtitle}</p>
+        <button className="hero-cta">{ctaText}</button>
+      </div>
+    </section>
+  );
+}
+
+// ProductCard Component
+function ProductCard({ name, price, image, description }) {
+  return (
+    <div className="product-card">
+      <img src={image} alt={name} className="product-image" />
+      <div className="product-info">
+        <h3 className="product-name">{name}</h3>
+        <p className="product-description">{description}</p>
+        <p className="product-price">${price}</p>
+      </div>
+    </div>
+  );
+}
+
+// Footer Component
+function Footer({ storeName, email, phone, address }) {
+  return (
+    <footer className="footer">
+      <div className="footer-content">
+        <div className="footer-section">
+          <h3>{storeName}</h3>
+          <p>Email: {email}</p>
+          <p>Phone: {phone}</p>
+          <p>Address: {address}</p>
+        </div>
+        <div className="footer-section">
+          <h4>Quick Links</h4>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="#privacy">Privacy Policy</a>
+          <a href="#terms">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// Main App Component
+function App() {
+  return (
+    <div className="app">
+      <Header storeName="ComponentCorner" />
+      
+      <Hero 
+        title="Welcome to ComponentCorner"
+        subtitle="Discover amazing products built with React components"
+        ctaText="Shop Now"
+      />
+      
+      <div className="products-container">
+        <h2 className="section-title">Featured Products</h2>
+        <div className="products-grid">
+          <ProductCard 
+            name="Wireless Headphones"
+            price="99.99"
+            image="https://placehold.co/600x400"
+            description="High-quality wireless headphones with noise cancellation"
+          />
+          <ProductCard 
+            name="Smart Watch"
+            price="249.99"
+            image="https://placehold.co/600x400"
+            description="Fitness tracking smartwatch with heart rate monitor"
+          />
+          <ProductCard 
+            name="Bluetooth Speaker"
+            price="79.99"
+            image="https://placehold.co/600x400"
+            description="Portable speaker with premium sound quality"
+          />
+        </div>
+      </div>
+      
+      <Footer 
+        storeName="ComponentCorner"
+        email="hello@componentcorner.com"
+        phone="(555) 123-4567"
+        address="123 React Street, Component City, RC 12345"
+      />
+    </div>
+  );
+}
+
+export default App;
