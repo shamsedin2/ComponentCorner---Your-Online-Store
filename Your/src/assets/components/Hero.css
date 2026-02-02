@@ -1,0 +1,23 @@
+.hero {
+  position: relative;
+  text-align: center;
+}
+
+.hero img {
+  width: 100%;
+}
+
+.hero-text {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.hero-text button {
+  padding: 10px 20px;
+  background-color: orange;
+  border: none;
+  margin-top: 10px;
+}
